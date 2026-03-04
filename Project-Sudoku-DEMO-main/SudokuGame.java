@@ -872,32 +872,6 @@ public class SudokuGame extends JFrame {
         statusLabel.setText("🎉 YOU WIN!");
         statusLabel.setForeground(ACCENT_GREEN);
 
-        // เอฟเฟกต์ฉลอง: สุ่มสีเขียวเฉดต่างๆ กะพริบ 15 รอบ (ทุก 100ms)
-        Timer celebrate = new Timer(100, new ActionListener() {
-            int count = 0;
-            Random rand = new Random();
-
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                // สุ่มสีเขียวหลายเฉดให้ทุกช่อง (สร้างเอฟเฟกต์วิบวับ)
-                for (int r = 0; r < SIZE; r++)
-                    for (int c = 0; c < SIZE; c++)
-                        cells[r][c].setBackground(new Color(
-                                20 + rand.nextInt(40), // R: 20-59 (น้อย)
-                                80 + rand.nextInt(120), // G: 80-199 (เขียวเด่น)
-                                60 + rand.nextInt(80))); // B: 60-139
-                count++;
-                if (count > 15) { // พอแล้ว 15 รอบ → หยุด
-                    ((Timer) e.getSource()).stop();
-                    // เปลี่ยนทุกช่องเป็นสีเขียวเข้มสม่ำเสมอ
-                    for (int r = 0; r < SIZE; r++)
-                        for (int c = 0; c < SIZE; c++)
-                            cells[r][c].setBackground(ACCENT_GREEN.darker().darker());
-                }
-            }
-        });
-        celebrate.start();
-
         // แสดง Dialog สรุปผลการเล่น
         int min = secondsElapsed / 60;
         int sec = secondsElapsed % 60;
